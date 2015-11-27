@@ -18,18 +18,14 @@ def index():
 
     elif request.method == 'POST':
        
-        if request.header.get('') == "ping":
-            return json.dumps({'msg': 'Hi!'})
-        if request.header.get() != "push":
-            return json.dumps({'msg': "wrong event type"})
+        if request.headers.get('test') == "ping":
+	    print 'HI!'	
+            return  'Hi!'
+        if request.headers.get('test') != "push":
+            print 'NoNoNONo!'
+	    print request.headers.get('test')
+	    return  "wrong event type"
 
-        repos = json.loads(io.open('repos.json', 'r').read())
+         
 
-        payload = request.json
-        repo_meta = {
-            'name': payload['repository']['name'],
-            'owner': payload['repository']['owner']['name'],
-        }
-        
-
-run(host='10.0.1.25', port=80, debug=debug, server=server)
+run(host='10.0.1.25', port=80)
